@@ -1,0 +1,53 @@
+-- Creating the database + tables for Stalegames - a brick and mortar game shop.
+CREATE DATABASE StaleGames;
+
+USE stalegames;
+
+CREATE TABLE employees
+(ID CHAR(4) PRIMARY KEY NOT NULL,
+`Name` Varchar(255) NOT NULL,
+DOB DATE, 
+`Start Date` DATE NOT NULL,
+`Position` Varchar(255));
+
+INSERT INTO employees
+VALUES
+('E124', 'Leroy Jenkins', '2003-04-09', '2021-11-09', 'Sales Assistant'),
+('E001', 'Owl Man', '1905-02-28', '1917-03-01', 'OverLord'),
+('E036', 'Adeola Fran', '1975-12-03', '2003-11-09', 'Senior Sales Assistant'),
+('E027', 'Renny Scram', '1982-05-19', '2003-11-09', 'Senior Sales Assistant'),
+('E334', 'Liz Bro', '1981-08-11', '2011-01-04', 'Store Manager');
+
+CREATE TABLE Product_Games
+(ID CHAR(5) PRIMARY KEY NOT NULL,
+`Name` Varchar(255) NOT NULL,
+`Price per Unit` DEC(5,2),
+Genre Varchar(255),
+`Year of release` YEAR);
+
+INSERT INTO Product_Games
+VALUES
+('G0355', 'Need for Beads', '5.99', 'Casual', '2005'),
+('G0201', 'My First Gecko', '11.99', 'Action', '2020'),
+('G0366', 'Sleep for Duty 3', '12.05', 'Casual', '2021'),
+('G0008', 'PacAnimal', '3.99', 'Horror', '1998'),
+('G3349', 'Pokemon', '54.99', 'Adventure', '2021');
+
+-- DROP TABLE IF EXISTS Sales;
+CREATE TABLE Sales
+(ID INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+-- Game_ID CHAR(5) NOT NULL
+Employee_ID CHAR(4) NOT NULL,
+TotalPrice DEC(6,2) NOT NULL,
+Numitems_sold INT NOT NULL,
+Sale_Date DATETIME NOT NULL,
+FOREIGN KEY (employee_id) REFERENCES employees(id));
+
+INSERT INTO Sales
+(Employee_ID, TotalPrice, Numitems_sold, Sale_Date)
+VALUES
+('E036', '11.98', '2', '2021-11-09 09:20:35.20341'),
+('E027', '31.97', '3', '2021-11-09 10:25:35.20387'),
+('E036', '12.05', '1', '2021-11-09 14:33:18.20341'),
+('E027', '89.88', 5, '2021-11-01 09:20:35.20341'),
+('E036', '54.99', '1', '2021-10-19 15:20:35.34401');
